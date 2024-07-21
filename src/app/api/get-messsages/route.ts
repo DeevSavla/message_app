@@ -2,8 +2,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 import dbConnect from "@/lib/dbConnect";
 import userModel from "@/models/User.model";
-import { User } from 'next-auth' 
-import { NextRequest } from "next/server";
 import mongoose from "mongoose";
 
 export async function GET(request:Request){
