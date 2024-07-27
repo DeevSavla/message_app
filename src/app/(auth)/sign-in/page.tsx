@@ -18,6 +18,7 @@ import {
 import { Loader2 } from "lucide-react"
 import { signInSchema } from "@/schemas/signInSchema"
 import { signIn } from "next-auth/react"
+import Link from "next/link"
 
 function page() {
   const { toast } = useToast()
@@ -105,6 +106,14 @@ function page() {
               </Button>
             </form>
           </Form>
+          <div className="text-center mt-4">
+            <p>
+              Do not have an account?{' '}
+              <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
