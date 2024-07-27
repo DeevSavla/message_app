@@ -4,11 +4,10 @@ import dbConnect from "@/lib/dbConnect";
 import userModel from "@/models/User.model";
 import mongoose from "mongoose";
 
-export async function GET(request:Request){
-    await dbConnect()
+export async function GET(request: Request) {
+    await dbConnect();
 
-    const session = await getServerSession(authOptions)
-
+    const session = await getServerSession(authOptions);
     const user = session?.user;
 
     if (!session || !user) {
@@ -21,51 +20,44 @@ export async function GET(request:Request){
         );
     }
 
-    //converted from string to object to prevent error during backend aggregation pipeline.
-    const userId = new mongoose.Types.ObjectId(user._id) 
+    const userId = new mongoose.Types.ObjectId(user._id);
 
     try {
-        const user = await userModel.aggregate([
+        const result = await userModel.aggregate([
+            { $match: { _id: userId } },
+            { $unwind: '$messages' },
+            { $sort: { 'messages.createdAt': -1 } },
             {
-                $match:{_id:userId}
-            },
-            {
-                $unwind:'$messages'
-            },
-            {
-                $sort:{
-                    'messages.createdAt':-1
+                $group: {
+                    _id: '$_id',
+                    messages: { $push: '$messages' }
                 }
-            },
-            {
-                $group:{_id:'$_id',messages:{
-                    $push:'$messages'
-                }}
             }
-        ])
+        ]);
 
-        if(!user || user.length===0){
+        if (result.length === 0 || !result[0].messages) {
             return Response.json(
                 {
-                    success: false,
-                    message: 'User not found'
+                    success: true,
+                    messages: []
                 },
-                { status: 401 }
+                { status: 200 }
             );
         }
 
         return Response.json(
             {
                 success: true,
-                messages:user[0].messages
+                messages: result[0].messages
             },
             { status: 200 }
         );
     } catch (error) {
+        console.error("Error while getting messages:", error);
         return Response.json(
             {
                 success: false,
-                message:'Error while getting messages'
+                message: 'Error while getting messages'
             },
             { status: 500 }
         );
