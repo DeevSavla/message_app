@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Separator } from '@/components/ui/separator'
 import { Loader2, RefreshCcw } from 'lucide-react'
-import MessageCard from '@/components/MessageCard'
+import {MessageCard} from '@/components/MessageCard'
 import { User } from 'next-auth'
 
 function page() {
@@ -57,6 +57,7 @@ function page() {
     setIsSwitchLoading(false)
     try {
       const response = await axios.get<ApiResponse>('/api/get-messages')
+      console.log(response)
       setMessages(response.data.messages || [])
       if(refresh){
         toast({
@@ -169,7 +170,7 @@ function page() {
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
+          messages.map((message) => (
             <MessageCard
               key={message._id as string}
               message={message}
