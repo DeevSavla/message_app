@@ -9,12 +9,13 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <>
       <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-gray-800 text-white">
-        <section className="text-center mb-8 md:mb-12">
+        <section className="text-center mb-2">
           <h1 className="text-3xl md:text-5xl font-bold">
             Dive into the World of Anonymous Feedback
           </h1>
@@ -22,7 +23,7 @@ export default function Home() {
             True Feedback - Where your identity remains a secret.
           </p>
         </section>
-
+        <Link href={'/dashboard'} className='mb-6 md:mb-10'>Go to your dashboard</Link>
         <Carousel
           plugins={[Autoplay({ delay: 2000 })]}
           className="w-full max-w-lg md:max-w-xl"
