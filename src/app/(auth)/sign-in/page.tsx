@@ -20,7 +20,7 @@ import { signInSchema } from "@/schemas/signInSchema"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
 
-function page() {
+function SignInPage() {
   const { toast } = useToast()
   const router = useRouter()
   const [isSubmit, setIsSubmit] = useState(false)
@@ -120,4 +120,4 @@ function page() {
   )
 }
 
-export default page
+export default SignInPage

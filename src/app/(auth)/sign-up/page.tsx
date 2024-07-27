@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,7 +22,7 @@ import {
 } from "@/components/ui/form"
 import { Loader2 } from "lucide-react"
 
-function page() {
+function SignUpPage() {
   const { toast } = useToast()
   const router = useRouter()
 
@@ -173,4 +172,4 @@ function page() {
   )
 }
 
-export default page
+export default SignUpPage

@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
-function page() {
+function VerifyPage() {
     const router = useRouter()
     const params = useParams<{username:string}>()
     //make sure that we get username as string
@@ -88,4 +88,4 @@ function page() {
   )
 }
 
-export default page
+export default VerifyPage

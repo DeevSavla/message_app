@@ -15,7 +15,7 @@ import { Loader2, RefreshCcw } from 'lucide-react'
 import {MessageCard} from '@/components/MessageCard'
 import { User } from 'next-auth'
 
-function page() {
+function Dashboard() {
   const [messages,setMessages] = useState<Message[]>([])
   const [isLoading,setIsLoading] = useState(false)
   const [isSwitchLoading,setIsSwitchLoading] = useState(false)
@@ -186,4 +186,4 @@ function page() {
 }
 
 
-export default page
+export default Dashboard
